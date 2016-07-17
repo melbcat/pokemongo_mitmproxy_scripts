@@ -1,3 +1,8 @@
 def decode(stream):
-	import zlib
-	return zlib.decompress(stream, zlib.MAX_WBITS + 16)
+	import cStringIO
+	import gzip
+	
+	buf = cStringIO.StringIO(stream)
+	reader = gzip.GzipFile(fileobj=buf, mode='rb')
+	
+	return reader.read()

@@ -22,6 +22,7 @@ def request(context, flow):
 	global OUTPUT_DIR
 	global REQUEST_ID
 	
+	print 'REQUEST'
 	if flow.request.content:
 		filename = os.path.join(OUTPUT_DIR, REQUEST_TEMPLATE.format(REQUEST_ID))
 		with open(filename, 'wb') as fs:
@@ -32,6 +33,7 @@ def response(context, flow):
 	global OUTPUT_DIR
 	global RESPONSE_ID
 	
+	print 'RESPONSE'
 	if flow.response.body:
 		filename = os.path.join(OUTPUT_DIR, RESPONSE_TEMPLATE.format(REQUEST_ID))
 		with open(filename, 'wb') as fs:

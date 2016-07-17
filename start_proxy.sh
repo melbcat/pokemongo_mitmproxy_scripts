@@ -1,1 +1,7 @@
-mitmdump -s "decode_streams.py" -p 443 -R https://pgorelease.nianticlabs.com -v
+SCRIPT="decode_streams.py"
+if (( $# == 1))
+then
+	SCRIPT="$1"
+fi
+
+mitmdump -s "$SCRIPT" -p 8080 -R https://pgorelease.nianticlabs.com -v
