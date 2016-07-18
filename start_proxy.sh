@@ -1,4 +1,4 @@
-SCRIPT="decode_streams.py"
+SCRIPT="dump_raw_streams.py"
 if (( $# == 1))
 then
 	SCRIPT="$1"

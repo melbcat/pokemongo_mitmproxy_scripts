@@ -1,7 +1,7 @@
-from decoders import gzip
+from decoders import drequest, dresponse
 import os
 
-OUTPUT_DIR = 'decoded_streams'
+OUTPUT_DIR = 'dump.raw'
 REQUEST_ID = 0
 RESPONSE_ID = 0
 REQUEST_TEMPLATE = 'request_{0}.bin'
@@ -22,11 +22,10 @@ def request(context, flow):
 	global OUTPUT_DIR
 	global REQUEST_ID
 	
-	print 'REQUEST'
 	if flow.request.content:
 		filename = os.path.join(OUTPUT_DIR, REQUEST_TEMPLATE.format(REQUEST_ID))
 		with open(filename, 'wb') as fs:
-			fs.write(gzip.decode(flow.request.content))
+			fs.write(drequest.decode(flow.request.content))
 		REQUEST_ID += 1
 	
 def response(context, flow):
@@ -37,5 +36,5 @@ def response(context, flow):
 	if flow.response.body:
 		filename = os.path.join(OUTPUT_DIR, RESPONSE_TEMPLATE.format(REQUEST_ID))
 		with open(filename, 'wb') as fs:
-			fs.write(gzip.decode(flow.response.body))
+			fs.write(dresponse.decode(flow.response.body))
 		RESPONSE_ID += 1
